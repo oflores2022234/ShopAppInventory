@@ -168,10 +168,61 @@ Delimiter ;
 
 call sp_AgregarCliente('Oscar Alejandro', 'Flores Yllescas', 'Antigua Guatemala', '42363512', 'ayllescas34@gmail.com');
 
-select * from Cliente;
+
+-- TIPO EMPLEADO
+describe TipoEmpleado;
+Delimiter $$
+	Create procedure sp_AgregarTipoEmpleado (in descripcionTipoEmpleado varchar(150))
+	Begin
+		insert into TipoEmpleado(descripcionTipoEmpleado)
+			values (descripcionTipoEmpleado);
+    End$$
+Delimiter ;
+
+call sp_AgregarTipoEmpleado('Administrativo');
 
 
+-- EMPLEADO
+describe Empleado;
 
+Delimiter $$
+	Create procedure sp_AgregarEmpleado (in nombresEmpleado varchar(150), in apellidosEmpleado varchar(150), in tipoEmpleadoId int, in fechaContratacion date, in salario decimal(10,2))
+    Begin
+		insert into Empleado(nombresEmpleado, apellidosEmpleado, tipoEmpleadoId, fechaContratacion, salario)
+			values (nombresEmpleado, apellidosEmpleado, tipoEmpleadoId, fechaContratacion, salario);
+    End$$
+Delimiter ;
+
+call sp_AgregarEmpleado ('Oscar Alejandro', 'Flores Yllescas', 1, now(), 25000.00);
+
+
+-- USUARIO
+describe Usuario;
+Delimiter $$
+	Create procedure sp_AgregarUsuario(in nombreUsuario varchar(100), in apellidoUsuario varchar(100),
+		in usuarioLogin varchar(50), in contrasena varchar(50))
+	Begin
+		Insert into Usuario(nombreUsuario, apellidoUsuario, usuarioLogin, contrasena)
+			values(nombreUsuario, apellidoUsuario, usuarioLogin,contrasena);
+    End$$
+Delimiter ;
+
+call sp_AgregarUsuario('Alejandro', 'Flores', 'oflores','1236');
+
+
+-- PRODUCTO
+describe producto;
+Delimiter $$
+	create procedure sp_AgregarProducto(in nombreProducto varchar(150), in descripcionProducto varchar(150), in precioCompra decimal(10,2), in precioVenta decimal(10,2)
+	in stock int, in tipoProductoId int, in proveedorId int)
+				Begin
+					insert into Producto(nombreProducto, descripcionProducto, precioCompra, precioVenta, stock, tipoProductoId, proveedorId)
+					values (nombreProducto, descripcionProducto, precioCompra, precioVenta, stock, tipoProductoId, proveedorId);
+                End$$
+Delimiter ;
+
+call sp_AgregarProducto('Azistin', 'Con cloro y aroma a lavanda', 1.50, 2.50, 250, 1,1);
+select * from producto;
 
 
 
