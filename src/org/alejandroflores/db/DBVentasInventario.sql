@@ -213,7 +213,7 @@ call sp_AgregarUsuario('Alejandro', 'Flores', 'oflores','1236');
 -- PRODUCTO
 describe producto;
 Delimiter $$
-	create procedure sp_AgregarProducto(in nombreProducto varchar(150), in descripcionProducto varchar(150), in precioCompra decimal(10,2), in precioVenta decimal(10,2)
+	create procedure sp_AgregarProducto(in nombreProducto varchar(150), in descripcionProducto varchar(150), in precioCompra decimal(10,2), in precioVenta decimal(10,2),
 	in stock int, in tipoProductoId int, in proveedorId int)
 				Begin
 					insert into Producto(nombreProducto, descripcionProducto, precioCompra, precioVenta, stock, tipoProductoId, proveedorId)
