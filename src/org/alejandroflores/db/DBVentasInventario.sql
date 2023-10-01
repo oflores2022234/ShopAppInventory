@@ -165,30 +165,43 @@ CREATE TABLE Inventario (
         REFERENCES Producto (productoId) ON DELETE CASCADE
 );
 
--- TUPLAS DE LA ENTIDAD ROL --
 
-Insert into Rol (nombreRol, descripcionRol) values 
-('Administrador', 'Control Total de la aplicación'),
-('Usuario', 'Acciones Limitadas en la aplicación');
+-- **********PROCEDIMIENTOS ALMACENADOR********** --
 
+-- -------- PROCEDIMIENTOS ALMACENADOR DE LA ENTIDAD ROL ----------
 
--- TUPLAS DE LA ENTIDAD USUARIO --
+-- AGREGAR --
 
-Insert into Usuario (nombreUsuario, apellidoUsuario, usuario, clave, rolId) values
-('Oscar Alejandro', 'Flores Yllescas', 'oflores', '12345', 1),
-('María Fernanda', 'Flores Yllescas', 'marifer29', 'mafer', 1),
-('Vilma Del Carmen', 'Yllescas Aguilar', 'vilmadcy', 'vilma22', 2),
-('Edwin Harolfo', 'Flores Martínez', 'edwinflo', 'edwin31', 2),
-('Valeria Sol María', 'Gutierrez', 'valeria20', 'solGu', 1);
+Delimiter $$
+	Create procedure sp_AgregarRol(in nombreRol varchar(50),in descripcionRol varchar(150))
+    Begin
+		Insert into Rol(nombreRol, descripcionRol)
+			values (nombreRol, descripcionRol);
+    End$$
+Delimiter ;
 
--- TUPLAS DE LA ENTIDAD TIPOPRODUCTO --
-Insert into TipoProducto (nombreTipoProducto, descripcionTipoProducto) values
-('Higiene y Limpieza','Todo tipo de producto para la limpieza de hogares y oficinas'),
-('Alimentos',''),
-('',''),
-('',''),
-('','');
+call sp_AgregarRol('Administrador','Control total de la aplicación');
+call sp_AgregarRol('Básico','Control limitado de la aplicación');
 
+-- LISTAR --
+
+Delimiter $$
+	Create procedure sp_ListarRol()
+    Begin
+		Select
+			R.rolId,
+            R.nombreRol,
+            R.descripcionRol
+            from Rol R;
+    End$$
+Delimiter ;
+
+call sp_ListarRol();
+
+Delimiter $$
+	Create procedure sp_BuscarRol();
+    
+Delimiter ;
 
 
 
